@@ -11,9 +11,9 @@
 </row>
 <row>
     <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
-        <h1><strong>Poeng</strong></h1>       
+        <h1><strong>Poeng</strong></h1>
     </div>
-    <div class="col-lg-10 col-lg-offset-1">
+    <div class="col-lg-8 col-lg-offset-2 col-sm-12 col-xs-12">
         @if (Model.LastUpdated.HasValue)
         {
             <span class="pull-right small">Sist oppdatert: @Model.LastUpdated.Value.ToString("dd.MM.yyyy")</span>
@@ -26,31 +26,29 @@
         }
         else
         {
-            <div class="col col-lg-10 col-lg-offset-1">
-                <table class="table table-hover" style="font-size: 14px">
-                    <thead>
-                        <tr>
-                            <th style="text-align:left;">#</th>
-                            <th style="text-align:left;">Navn</th>
-                            <th style="text-align:center;">Poeng</th>
-                            <th style="text-align:center;">Bonus</th>
-                            <th style="text-align:center;">Totalt</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var score in Model.Scores)
+            <table class="table table-hover" style="font-size: 14px">
+                <thead>
+                    <tr>
+                        <th style="text-align:left;">#</th>
+                        <th style="text-align:left;">Navn</th>
+                        <th style="text-align:center;">Poeng</th>
+                        <th style="text-align:center;">Bonus</th>
+                        <th style="text-align:center;">Totalt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var score in Model.Scores)
                 {
-                            <tr>
-                                <td style="text-align:left;">@score.Rank</td>
-                                <td style="text-align:left;">@score.NameOfUser</td>
-                                <td style="text-align:center;">@score.Points</td>
-                                <td style="text-align:center;">@score.Bonus</td>
-                                <td style="text-align:center;">@score.TotalPoints</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                        <tr>
+                            <td style="text-align:left;">@score.Rank</td>
+                            <td style="text-align:left;">@score.NameOfUser</td>
+                            <td style="text-align:center;">@score.Points</td>
+                            <td style="text-align:center;">@score.Bonus</td>
+                            <td style="text-align:center;">@score.TotalPoints</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
     </div>
 </row>

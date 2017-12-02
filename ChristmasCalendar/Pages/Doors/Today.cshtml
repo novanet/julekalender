@@ -23,8 +23,8 @@
         {
             <div class="row">
                 <div class="col-lg-4" style="text-align:center;">
-                    <h3>Dagens luke</h3>
-                    <br />
+                    <h3 class="visible-lg">Dagens luke</h3>
+                    <br class="visible-lg" />
                     <ul class="nav nav-pills" style="padding:0;">
                         <li role="presentation" style="padding:0;margin:0;">         
                             <div>                              
@@ -42,8 +42,11 @@
                     </ul>
                 </div>
                 <div class="col-lg-4">
+                    <br class="hidden-lg" />
+                    <br class="hidden-lg" />
                     <h3>Svar på dagens luke</h3>
-                    <br /><br />
+                    <br class="visible-lg" />
+                    <br class="visible-lg" />
                     <form asp-page-handler="RegisterAnswer" asp-route-returnUrl="/Doors/AnswerHasBeenRegistered" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="form-group">
@@ -60,8 +63,11 @@
                     </form>
                 </div>
                 <div class="col-lg-4">
+                    <br class="hidden-lg" />
+                    <br class="hidden-lg" />
                     <h3>Registrerte svar</h3>
-                    <br /><br />
+                    <br class="visible-lg"/>
+                    <br class="visible-lg" />
                     @if (!Model.RegisteredAnswers.Any())
                     {
                         <span>Du har ikke svart på denne enda</span>
@@ -76,7 +82,7 @@
                                     <th>Land</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="font-size: 12px;">
                                 @foreach (var answer in Model.RegisteredAnswers)
                                 {
                                     <tr>
