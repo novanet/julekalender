@@ -1,0 +1,112 @@
+﻿@font-face {
+    font-family: CenturyGothic;
+    src: url('CenturyGothic.otf');
+}
+
+@font-face {
+    font-family: CenturyGothic;
+    font-weight: bold;
+    src: url('CenturyGothic-Bold.otf');
+}
+
+* {
+    font-family: "CenturyGothic";
+}
+
+body {
+    background-color: white;
+}
+
+div.nav-links {
+    margin-top: 3%;
+}
+
+a.nav-links {
+    color: black;
+    font-size: 13px !important;
+    margin-left: 14px;
+    text-decoration: none;
+}
+
+    a.nav-links:hover {
+        color: #50E3C2;
+    }
+
+.box-splash,
+.box-grey {
+    margin-top: 20px;
+}
+
+.box-black,
+.box-middle {
+    background-color: #3B3B3B;
+    color: #FFFFFF;
+}
+
+.box-big {
+    font-size: 32px;
+    height: 300px;
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
+span.box-big {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.box-image {
+    background-image: url("/images/splash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.box-grey {
+    padding: 4%;
+    background-color: #F8F8F8;
+}
+
+.box-middle {
+    padding: 14px;
+    padding-bottom: 35px;
+    border: 4px solid #F8F8F8;
+    font-size: 14px;
+}
+
+@media (min-height: 680px) {
+    .col-container {
+        display: table; /* Make the container element behave like a table */
+        width: 100%; /* Set full-width to expand the whole page */
+    }
+
+    .col {
+        display: table-cell; /* Make elements inside the container behave like table cells */
+    }
+
+    .box-middle {
+        width: 33.33%;
+    }
+}
+
+@media (max-height: 679px) {
+    .box-middle {
+        width: 100%;
+    }
+}
+
+.text-green {
+    color: #50E3C2;
+}
+
+.underline-green {
+    text-decoration: none;
+    border-bottom: 4px solid #50E3C2;
+}
+
+.current-page,
+.underline-black {
+    text-decoration: none;
+    border-bottom: 2px solid black;
+    padding-bottom: 4px;
+}

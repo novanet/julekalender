@@ -1,0 +1,108 @@
+﻿@page
+@inject SignInManager<ApplicationUser> SignInManager
+@model IndexModel
+
+<row>
+    <div class="col-lg-10 col-lg-offset-1">
+        <a href="https://www.novanet.no"><img src="~/images/NN_Logo_Liten_RGB.svg" alt="novanet-logo" width="100" /></a>
+        <div class="nav-links pull-right">
+            <a class="nav-links" asp-page="/Highscore/Highscore">Poeng</a><a class="nav-links" asp-page="/Doors/PreviousDoors">Tidligere luker</a>
+        </div>
+    </div>
+</row>
+<row>
+    <div class="col-container">
+        <div class="col-lg-5 col col-lg-offset-1 box-big box-image visible-lg box-splash"></div>
+        <div class="col-lg-5 col box-black box-big text-center box-splash">
+            <span class="box-big"><strong>Velkommen til Novanets <span class="text-green">julekalender</span> 2017</strong></span>
+        </div>
+    </div>
+</row>
+<row>
+    <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
+        <h1><strong>Dagens luke</strong></h1>
+        <br />
+        @if (Model.TodaysDoor == null)
+        {
+            @if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+            {
+                <span>Kalenderen har helgefri! </span>
+            }
+            else
+            {
+                <span>Det er ingen luke for i dag</span>
+            }
+        }        
+        else if (!SignInManager.IsSignedIn(User))
+        {
+            <strong>Logg inn med:</strong><br /><br />
+            <form asp-page="./Account/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                <div>
+                    <p>
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+        else
+        {
+            <a class="btn btn-danger" asp-page="/Doors/Today">Åpne luke</a><br /><br />
+            <span>
+                <strong>NB!</strong> Når du åpner luken første gang så vil tidspunktet for dette bli registrert.<br />
+                Hvis du sender inn korrekt og endelig svar innen én time gir det ett ekstrapoeng.
+            </span>
+        }
+    </div>
+</row>
+<row>
+    <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
+        <h1><strong>Slik fungerer det</strong></h1>
+        <br /><br />
+
+        <div class="col-container">
+            <div class="col box-middle">
+                <h2 class="text-green"><strong>Hvordan</strong></h2>
+                Hver luke i kalenderen er et bilde fra et sted i verden!<br /><br />
+                Du skal svare på hvilket sted og land dette er. Sted kan være by, tettsted, fjell etc.<br /><br />
+                Svaret må leveres dagen luken gjelder for. <br /><br />Det er ingen luker i helgene.
+            </div>
+
+            <div class="col box-middle">
+                <h2 class="text-green"><strong>Poeng</strong></h2>
+                Poengene beregnes slik:<br /><br />
+                - 1 poeng for korrekt sted<br />
+                - 1 poeng for korrekt land<br />
+                - 1 poeng hvis man klarer begge innen en time fra da man åpnet luken<br />
+                <br />
+                Poengene blir oppdatert daglig på poengsiden.
+            </div>
+
+            <div class="col box-middle">
+                <h2 class="text-green"><strong>Vinner</strong></h2>
+                Når kalenderen er ferdig vinner den med flest poeng. <br /><br />
+                Hvis det er flere som har likt antall poeng totalt så vinner den med flest poeng (ikke bonus). <br /><br />Hvis det fortsatt er likt så vinner den som totalt sett har brukt minst tid på korrekte svar.
+            </div>
+        </div>
+        <br />
+        <br />
+        Det koster ingenting å delta i konkurransen.<br />
+        Ansatte i Novanet kan også delta.<br /><br />
+       
+        Kalenderen avsluttes fredag 22.desember.
+    </div>
+    <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
+        <h1><strong>Premie</strong></h1><br /><br />
+        <div class="col-lg-6 col-lg-offset-3">
+            <img src="~/images/gavekort.jpg" width="100%" alt="premie-gavekort" />
+            <br />
+            <br />
+            <p>Vinneren av konkurransen får et gavekort på Nomaden til 500 kr.</p>
+        </div>
+    </div>
+    <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
+        <h1><strong>Husk!</strong></h1><br /><br />Det er lov å svare flere ganger, det siste innsendte svaret teller.
+    </div>
+</row>
