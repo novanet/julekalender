@@ -9,7 +9,7 @@ namespace ChristmasCalendar.Data
     {
         Task<List<Door>> GetHistoricDoors(DateTime now);
 
-        Task<List<HighscoreViewModel>> GetScores();
+        Task<List<HighscoreViewModel>> GetScores(int year);
 
         Task<Door> GetTodaysDoor(DateTime today);
 

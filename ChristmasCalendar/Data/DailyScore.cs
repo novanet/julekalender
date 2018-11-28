@@ -25,5 +25,7 @@ namespace ChristmasCalendar.Data
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public int Year { get; set; }
     }
 }

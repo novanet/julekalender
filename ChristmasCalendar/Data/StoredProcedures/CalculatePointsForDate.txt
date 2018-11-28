@@ -10,7 +10,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO [dbo].[DailyScore]([UserId],[DoorId],[Points],[Bonus],[TimeToAnswer],[Rank],[RankMovement])
+	INSERT INTO [dbo].[DailyScore]([UserId],[DoorId],[Points],[Bonus],[TimeToAnswer],[Rank],[RankMovement],[Year])
 	SELECT
 		A.[UserId],
 		A.[DoorId],		
@@ -18,7 +18,8 @@ BEGIN
 		IIF ((CAST(A.LocationIsCorrect AS INT) + CAST(A.CountryIsCorrect AS INT)) = 2 AND DATEDIFF(second, F.[When], A.[When]) < 3600, 1, 0) as Bonus,
 		DATEDIFF(second, F.[When], A.[When]) AS TimeToAnswer,
 		1 as [Rank],
-		0 as [RankMovement]
+		0 as [RankMovement],
+		YEAR(GETDATE()) as [Year]
 		FROM [dbo].[Answer] A
 	INNER JOIN [dbo].[FirstTimeOpeningDoor] F ON A.UserId = F.UserId AND A.DoorId = F.DoorId
 	WHERE CAST(A.[When] as DATE) = @date

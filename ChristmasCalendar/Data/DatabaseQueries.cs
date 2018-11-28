@@ -19,7 +19,7 @@ namespace ChristmasCalendar.Data
         public Task<List<Door>> GetHistoricDoors(DateTime now)
         {
             return _context.Doors
-                .Where(x => x.ForDate < now)
+                .Where(x => x.ForDate.Year == now.Year && x.ForDate < now)
                 .OrderByDescending(x => x.ForDate)
                 .ToListAsync();
         }
@@ -32,10 +32,11 @@ namespace ChristmasCalendar.Data
                 .ToListAsync();
         }
 
-        public Task<List<HighscoreViewModel>> GetScores()
+        public Task<List<HighscoreViewModel>> GetScores(int year)
         {
             return _context.DailyScore
                 .Include(c => c.ApplicationUser)
+                .Where(x => x.Year == year)
                 .GroupBy(x => x.ApplicationUser)
                 .Select(x => new HighscoreViewModel
                 {

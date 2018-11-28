@@ -26,7 +26,7 @@ namespace ChristmasCalendar.Pages.Highscore
 
         public async Task OnGetAsync()
         {
-            var scoresFromDb = await _databaseQueries.GetScores();
+            var scoresFromDb = await _databaseQueries.GetScores(DateTime.Now.Year);
 
             Scores = scoresFromDb
                 .Select(x => new HighscoreViewModel
