@@ -41,9 +41,11 @@ namespace ChristmasCalendar.Data
                 {
                     NameOfUser = x.Key.Name,
                     Points = x.Sum(y => y.Points),
-                    Bonus = x.Sum(y => y.Bonus)
+                    Bonus = x.Sum(y => y.Bonus),
+                    AverageSecondsSpentPerCorrectDoor = (int)x.Where(y => y.Points == 2).DefaultIfEmpty().Average(y => y.TimeToAnswer)
                 })
                 .OrderByDescending(x => x.TotalPoints)
+                .ThenBy(x => x.NameOfUser)
                 .ToListAsync();
         }
 

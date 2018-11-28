@@ -16,12 +16,13 @@
     <div class="col-lg-8 col-lg-offset-2 col-sm-12 col-xs-12">
         @if (Model.LastUpdated.HasValue)
         {
-            <span class="pull-right small">Sist oppdatert: @Model.LastUpdated.Value.ToString("dd.MM.yyyy")</span>
+            <span class="pull-left small">Oppdatert: @Model.LastUpdated.Value.ToString("dd.MM.yyyy")</span>
+            <span class="pull-right small">Sortering: Totalt, Poeng, Tid</span>            
         }
         <br /><br />
 
         @if (!Model.Scores.Any())
-            {
+        {
             <span>Ingen poeng så langt</span>
         }
         else
@@ -31,24 +32,39 @@
                     <tr>
                         <th style="text-align:left;">#</th>
                         <th style="text-align:left;">Navn</th>
+                        <th style="text-align:center;">Tid*</th>
                         <th style="text-align:center;">Poeng</th>
-                        <th style="text-align:center;">Bonus</th>
-                        <th style="text-align:center;">Totalt</th>
+                        <th class="hidden-xs" style="text-align:center;">Bonus**</th>
+                        <th class="hidden-xs" style="text-align:center;">Totalt</th>                        
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var score in Model.Scores)
-                {
-                        <tr>
+                    {
+                        <tr>                            
                             <td style="text-align:left;">@score.Rank</td>
                             <td style="text-align:left;">@score.NameOfUser</td>
-                            <td style="text-align:center;">@score.Points</td>
-                            <td style="text-align:center;">@score.Bonus</td>
-                            <td style="text-align:center;">@score.TotalPoints</td>
+                            <td style="text-align:center;">@score.AverageSecondsSpentPerCorrectDoor</td>
+                            <td class="hidden-xs" style="text-align:center;">@score.Points</td>
+                            <td class="hidden-xs" style="text-align:center;">@score.Bonus</td>
+                            <td style="text-align:center;"><strong>@score.TotalPoints</strong></td>
                         </tr>
                     }
                 </tbody>
             </table>
+            <br />
+            <hr />
+            <p><small>* Tid er antall sekunder i snitt per luke man har klart både sted og land</small></p>
+            <p class="hidden-xs"><small>** Bonuspoeng gis hvis man klarer sted og land innen en time fra da man selv åpnet luken</small></p>            
+            <br />
+            <div>
+                <small>
+                    Stillingen sorteres slik:<br />
+                    1. Totalt antall poeng<br />
+                    2. Poeng (ikke bonus)<br />
+                    3. Snittid per korrekte luke
+                </small>
+            </div>
         }
     </div>
 </row>
