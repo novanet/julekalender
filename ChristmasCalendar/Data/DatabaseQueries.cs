@@ -35,12 +35,11 @@ namespace ChristmasCalendar.Data
         public Task<List<HighscoreViewModel>> GetScores(int year)
         {
             return _context.DailyScore
-                .Include(c => c.ApplicationUser)
                 .Where(x => x.Year == year)
-                .GroupBy(x => x.ApplicationUser)
+                .GroupBy(x => new { x.UserId, x.NameOfUser })
                 .Select(x => new HighscoreViewModel
                 {
-                    NameOfUser = x.Key.Name,
+                    NameOfUser = x.Key.NameOfUser,
                     Points = x.Sum(y => y.Points),
                     Bonus = x.Sum(y => y.Bonus),
                     AverageSecondsSpentPerCorrectDoor = (int)x.Where(y => y.Points == 2).DefaultIfEmpty().Average(y => y.TimeToAnswer)

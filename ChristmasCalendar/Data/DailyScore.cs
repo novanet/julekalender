@@ -23,9 +23,8 @@ namespace ChristmasCalendar.Data
 
         public int TimeToAnswer { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual ApplicationUser ApplicationUser { get; set; }
-
         public int Year { get; set; }
+
+        public string NameOfUser { get; set; }
     }
 }
