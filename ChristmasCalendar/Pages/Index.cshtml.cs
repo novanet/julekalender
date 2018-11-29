@@ -27,6 +27,8 @@ namespace ChristmasCalendar.Pages
 
         public Door TodaysDoor { get; set; }
 
+        public Door NextDoor { get; set; }
+
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public string ReturnUrl { get; set; }
@@ -41,6 +43,8 @@ namespace ChristmasCalendar.Pages
             ReturnUrl = returnUrl;
 
             TodaysDoor = (await _databaseQueries.GetTodaysDoor(DateTime.Today));
+
+            NextDoor = (await _databaseQueries.GetNextDoor(DateTime.Today));
 
             if (TodaysDoor == null)
                 return Page();

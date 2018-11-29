@@ -13,6 +13,8 @@ namespace ChristmasCalendar.Data
 
         Task<Door> GetTodaysDoor(DateTime today);
 
+        Task<Door> GetNextDoor(DateTime today);
+
         Task<List<Answer>> GetRegisteredAnswersForDoor(string userId, int doorId);
 
         Task<bool> HasOpenedDoor(string userId, int doorId);

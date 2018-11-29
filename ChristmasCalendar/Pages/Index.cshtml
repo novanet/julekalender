@@ -34,6 +34,12 @@
             {
                 <span>Det er ingen luke for i dag</span>
             }
+
+            @if (Model.NextDoor != null)
+            {
+                <br />
+                <span>Neste luke er @Model.NextDoor.ForDate.ToString("d. MMM")</span>
+            }
         }
         else if (!SignInManager.IsSignedIn(User))
         {
