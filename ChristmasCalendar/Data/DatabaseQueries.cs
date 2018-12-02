@@ -56,7 +56,11 @@ namespace ChristmasCalendar.Data
 
         public Task<Door> GetNextDoor(DateTime today)
         {
-            return _context.Doors.Where(x => x.ForDate > today).OrderBy(x => x.ForDate).FirstOrDefaultAsync();
+            return _context.Doors
+                .Where(x => x.ForDate > today)
+                .Where(x => x.ForDate < new DateTime(today.Year + 1, 1, 1))
+                .OrderBy(x => x.ForDate)
+                .FirstOrDefaultAsync();
         }
 
         public Task<bool> HasOpenedDoor(string userId, int doorId)

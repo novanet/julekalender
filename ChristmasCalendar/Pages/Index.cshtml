@@ -38,7 +38,7 @@
             @if (Model.NextDoor != null)
             {
                 <br />
-                <span>Neste luke er @Model.NextDoor.ForDate.ToString("d. MMM")</span>
+                <span>Neste luke er @Model.NextDoor.ForDate.ToString("d. MMM").ToLower()</span>
             }
         }
         else if (!SignInManager.IsSignedIn(User))
@@ -85,7 +85,7 @@
                     Poengene beregnes slik:<br /><br />
                     - 1 poeng for korrekt sted<br />
                     - 1 poeng for korrekt land<br />
-                    - 1 poeng hvis man klarer begge innen en time fra da man åpnet luken<br />
+                    - 1 bonuspoeng hvis man klarer begge innen en time fra da man åpnet luken<br />
                     <br />
                     Poengene blir oppdatert daglig på poengsiden.
                     <br />
@@ -95,7 +95,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 box-middle">
                     <h2 class="text-green"><strong>Vinner</strong></h2>
                     Når kalenderen er ferdig vinner den med flest poeng. <br /><br />
-                    Hvis det er flere som har likt antall poeng totalt så vinner den med flest poeng (ikke bonus). <br /><br />Hvis det fortsatt er likt så vinner den som totalt sett har brukt minst tid på korrekte svar.
+                    Hvis det er flere som har likt antall poeng totalt så vinner den med flest poeng uten bonus medregnet. <br /><br />Hvis det fortsatt er likt så vinner den som totalt sett har brukt minst tid på korrekte svar.
                     <br />
                     <br />
                 </div>
