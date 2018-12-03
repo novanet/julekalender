@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ChristmasCalendar.Data;
+using Microsoft.AspNetCore.HttpOverrides;
 
 
 namespace ChristmasCalendar
@@ -27,7 +28,7 @@ namespace ChristmasCalendar
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
@@ -50,11 +51,19 @@ namespace ChristmasCalendar
 
             services.AddScoped<IDatabaseQueries, DatabaseQueries>();
             services.AddScoped<IDatabasePersister, DatabasePersister>();
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseForwardedHeaders();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -66,7 +75,9 @@ namespace ChristmasCalendar
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseStaticFiles();            
+
+            app.UseHttpMethodOverride();
 
             app.UseAuthentication();
 
