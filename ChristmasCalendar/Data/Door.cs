@@ -21,5 +21,9 @@ namespace ChristmasCalendar.Data
 
         [MaxLength(200)]
         public string Description { get; protected set; }
+
+        public int? PointsForCountry { get; protected set; }
+
+        public int? PointsForLocation { get; protected set; }
     }
 }

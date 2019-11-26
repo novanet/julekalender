@@ -34,7 +34,7 @@ namespace ChristmasCalendar.Pages.Highscore
                     NameOfUser = x.NameOfUser,
                     Points = x.Points,
                     Bonus = x.Bonus,
-                    Rank = scoresFromDb.Where(y => y.TotalPoints * 1000000 + y.Points * 100000 - y.AverageSecondsSpentPerCorrectDoor > x.TotalPoints * 1000000 + x.Points * 100000 - x.AverageSecondsSpentPerCorrectDoor).Count() + 1,
+                    Rank = scoresFromDb.Count(y => y.TotalPoints * 1000000 + y.Points * 100000 - y.AverageSecondsSpentPerCorrectDoor > x.TotalPoints * 1000000 + x.Points * 100000 - x.AverageSecondsSpentPerCorrectDoor) + 1,
                     AverageSecondsSpentPerCorrectDoor = x.AverageSecondsSpentPerCorrectDoor
                 })
                 .OrderBy(x => x.Rank)

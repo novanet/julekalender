@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ChristmasCalendar.Data;
+using ChristmasCalendar.Extensions;
 
 namespace ChristmasCalendar.Pages.Account
 {

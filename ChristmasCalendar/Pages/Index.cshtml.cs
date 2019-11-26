@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ChristmasCalendar.Data;
 using System;
+using ChristmasCalendar.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChristmasCalendar.Pages

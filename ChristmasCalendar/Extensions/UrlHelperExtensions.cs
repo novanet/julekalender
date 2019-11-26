@@ -1,4 +1,6 @@
-namespace Microsoft.AspNetCore.Mvc
+using Microsoft.AspNetCore.Mvc;
+
+namespace ChristmasCalendar.Extensions
 {
     public static class UrlHelperExtensions
     {
