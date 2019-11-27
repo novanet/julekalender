@@ -7,7 +7,7 @@
         <div class="nav-links pull-right">
             <a class="nav-links" asp-page="/Highscore/Highscore">Poeng</a><a class="nav-links" asp-page="/Doors/PreviousDoors">Tidligere luker</a>
         </div>
-    </div>    
+    </div>
 </row>
 <row>
     <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
@@ -26,18 +26,17 @@
                     <h3 class="visible-lg">Dagens luke</h3>
                     <br class="visible-lg" />
                     <ul class="nav nav-pills" style="padding:0;">
-                        <li role="presentation" style="padding:0;margin:0;">         
-                            <div>                              
-                                <small>Åpnet kl. @Model.TimeWhenDoorWasOpened.ToString("HH:mm")</small>
+                        <li role="presentation" style="padding:0;margin:0;">
+                            <div>
+                                <small>Åpnet kl. @Model.TimeWhenDoorWasOpened.ToString("HH:mm")</small><br/>
+                                <small>Trykk på luken for å se bildet i full størrelse.</small>
                             </div>
                             <div style="padding-top:8px;">
                                 <a href="@Model.Door.ImagePath">
                                     <span class="badge luke" style="background-image: url(@Model.Door.ImagePath)">@Model.Door.ForDate.Day</span>
                                 </a>
                             </div>
-                            <div style="padding-top:8px;">
-                                <small>Trykk på luken for å se bildet i full størrelse.</small>
-                            </div>
+                            <div>@Model.Door.Description</div>
                         </li>
                     </ul>
                 </div>
@@ -66,7 +65,7 @@
                     <br class="hidden-lg" />
                     <br class="hidden-lg" />
                     <h3>Registrerte svar</h3>
-                    <br class="visible-lg"/>
+                    <br class="visible-lg" />
                     <br class="visible-lg" />
                     @if (!Model.RegisteredAnswers.Any())
                     {

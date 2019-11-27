@@ -40,7 +40,9 @@ namespace ChristmasCalendar.Data
                 .Select(x => new HighscoreViewModel
                 {
                     NameOfUser = x.Key.NameOfUser,
-                    Points = x.Sum(y => y.Points),
+                    PointsTotal = x.Sum(y => y.Points),
+                    PointsLastDoor = x.OrderByDescending(y => y.DoorNumber).First().Points,
+                    Rank = x.OrderByDescending(y => y.DoorNumber).First().Rank,
                     Bonus = x.Sum(y => y.Bonus),
                     AverageSecondsSpentPerCorrectDoor = (int)x.Where(y => y.Points == 2).DefaultIfEmpty().Average(y => y.TimeToAnswer)
                 })

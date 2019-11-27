@@ -59,10 +59,10 @@
         else
         {
             <a class="btn btn-danger" asp-page="/Doors/Today">Åpne luke</a><br /><br />
-            <span>
+            @*<span>
                 <strong>NB!</strong> Når du åpner luken første gang så vil tidspunktet for dette bli registrert.<br />
                 Hvis du sender inn korrekt og endelig svar innen én time gir det ett ekstrapoeng.
-            </span>
+            </span>*@
         }
     </div>
 </row>
@@ -86,10 +86,9 @@
 
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 box-middle">
                     <h2 class="text-green"><strong>Poeng</strong></h2>
-                    Poengene beregnes slik:<br /><br />
-                    - 1 poeng for korrekt sted<br />
-                    - 1 poeng for korrekt land<br />
-                    - Opptil 2 bonuspoeng avhengig av lukens vanskelighetsgrad<br />
+                    Poengene beregnes ut fra vanskelighetsgrad på lukene:<br /><br />Enkel, middels, vanskelig luke gir hhv. 1+1 poeng, 2+1 poeng og 3+1 poeng (sted + land).
+
+                    <br />
                     <br />
                     Poengene blir oppdatert daglig på poengsiden.
                     <br />
@@ -99,8 +98,12 @@
 
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 box-middle">
                     <h2 class="text-green"><strong>Vinner</strong></h2>
-                    Når kalenderen er ferdig vinner den med flest poeng. <br /><br />
-                    Hvis det er flere som har likt antall poeng totalt så vinner den med flest poeng uten bonus medregnet. <br /><br />Hvis det fortsatt er likt så blir det loddtrekning.
+                    Når kalenderen er ferdig vinner den med flest poeng.
+                    <br /><br />
+                    Hvis det er flere som har likt antall poeng totalt så blir det loddtrekning. 
+                    <br /><br />
+                    Lykke til og god reise!<br/>
+                                           <br />
                     <br />
                     <br />
                     <br />
@@ -126,7 +129,7 @@
     <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
         <h1><strong>Premie</strong></h1><br /><br />
         <div class="col-lg-6 col-lg-offset-3">
-            <img src="~/images/gavekort.jpg" width="100%" alt="premie-gavekort" />
+            <img src="~/images/gavekort.jpg" alt="premie-gavekort" />
             <br />
             <br />
             <p>Vinneren av konkurransen får et gavekort på Nomaden til 500 kr.</p>

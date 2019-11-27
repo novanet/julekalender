@@ -17,5 +17,7 @@
         public int TotalPoints => Points + Bonus;
 
         public int AverageSecondsSpentPerCorrectDoor { get; set; }
+        public int PointsLastDoor { get; set; }
+        public int PointsTotal { get; set; }
     }
 }

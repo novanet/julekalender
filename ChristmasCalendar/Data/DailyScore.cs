@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChristmasCalendar.Data
 {
@@ -8,6 +7,8 @@ namespace ChristmasCalendar.Data
         public int Id { get; set; }
 
         public int DoorId { get; set; }
+
+        public int? DoorNumber { get; set; }
 
         [MaxLength(450)]
 

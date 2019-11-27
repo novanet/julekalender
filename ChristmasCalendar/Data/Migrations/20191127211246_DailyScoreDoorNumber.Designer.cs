@@ -11,9 +11,10 @@ using System;
 namespace ChristmasCalendar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191127211246_DailyScoreDoorNumber")]
+    partial class DailyScoreDoorNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,8 +134,6 @@ namespace ChristmasCalendar.Migrations
                     b.Property<int>("RankMovement");
 
                     b.Property<int>("TimeToAnswer");
-
-                    b.Property<int?>("TotalPoints");
 
                     b.Property<string>("UserId")
                         .HasMaxLength(450);
