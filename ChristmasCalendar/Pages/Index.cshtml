@@ -38,7 +38,7 @@
             @if (Model.NextDoor != null)
             {
                 <br />
-                <span>Neste luke er @Model.NextDoor.ForDate.ToString("d. MMM").ToLower()</span>
+                <span>Neste luke er @Model.NextDoor.ForDate.Day. des</span>
             }
         }
         else if (!SignInManager.IsSignedIn(User))
@@ -129,7 +129,7 @@
     <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
         <h1><strong>Premie</strong></h1><br /><br />
         <div class="col-lg-6 col-lg-offset-3">
-            <img src="~/images/gavekort.jpg" alt="premie-gavekort" />
+            <img src="~/images/gavekort.jpg" alt="premie-gavekort" width="100%"/>
             <br />
             <br />
             <p>Vinneren av konkurransen får et gavekort på Nomaden til 500 kr.</p>
