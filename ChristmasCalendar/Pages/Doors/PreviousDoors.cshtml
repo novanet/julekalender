@@ -1,19 +1,26 @@
 ﻿@page
 @model PreviousDoorsModel
+@inject SignInManager<ApplicationUser> SignInManager
 
 <row>
     <div class="col-lg-10 col-lg-offset-1">
         <a asp-page="/Index"><img src="~/images/NN_Logo_Liten_RGB.svg" alt="novanet-logo" width="100" /></a>
         <div class="nav-links pull-right">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="nav-links" asp-page="/Doors/Today">Dagens</a>
+            }
             <a class="nav-links" asp-page="/Highscore/Highscore">Poeng</a><a class="nav-links current-page" asp-page="/Doors/PreviousDoors">Tidligere luker</a>@*<a class="nav-links" asp-page="/Doors/Today">Dagens luke</a>*@
         </div>
+        <br/>
+        <br/>
     </div>
 </row>
 <row>
     <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
         <h1><strong>Tidligere luker</strong></h1>
     </div>
-    <div class="col-lg-10 col-lg-offset-1">        
+    <div class="col-lg-10 col-lg-offset-1">
         <br />
         <br />
         @if (!Model.PreviousDoors.Any())
@@ -29,7 +36,7 @@
                         <div>Luke #<span>@door.Number</span> - <span>@door.ForDate.ToString("dd.MM.yyyy")</span></div>
                         <div style="padding-top:10px;">
                             <a href="@door.ImagePath">
-                                <span class="badge luke" style="background-image: url(@door.ImagePath)">@door.ForDate.Day</span>                                
+                                <span class="badge luke" style="background-image: url(@door.ImagePath)">@door.ForDate.Day</span>
                             </a>
                         </div>
                         <div style="padding-top:10px;">@door.Location, @door.Country</div>

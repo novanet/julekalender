@@ -46,7 +46,8 @@ namespace ChristmasCalendar.Data
                     Bonus = x.Sum(y => y.Bonus),
                     AverageSecondsSpentPerCorrectDoor = (int)x.Where(y => y.Points == 2).DefaultIfEmpty().Average(y => y.TimeToAnswer)
                 })
-                .OrderByDescending(x => x.TotalPoints)
+                .OrderBy(x => x.Rank)
+                .ThenByDescending(x => x.Points)
                 .ThenBy(x => x.NameOfUser)
                 .ToListAsync();
         }

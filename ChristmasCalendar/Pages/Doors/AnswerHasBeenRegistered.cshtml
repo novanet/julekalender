@@ -1,18 +1,26 @@
 ﻿@page
 @model AnswerHasBeenRegisteredModel
+@inject SignInManager<ApplicationUser> SignInManager
 @{
 }
 <row>
     <div class="col-lg-10 col-lg-offset-1">
         <a asp-page="/Index"><img src="~/images/NN_Logo_Liten_RGB.svg" alt="novanet-logo" width="100" /></a>
         <div class="nav-links pull-right">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="nav-links" asp-page="/Doors/Today">Dagens</a>
+            }
             <a class="nav-links" asp-page="/Highscore/Highscore">Poeng</a><a class="nav-links" asp-page="/Doors/PreviousDoors">Tidligere luker</a>
         </div>
+        <br/>
+        <br/>
     </div>
 </row>
 <row>
-<row>
     <div class="col-lg-10 col-lg-offset-1 text-center">
+        <br />
+        <br />
         <h2>
             <strong>
                 Svaret er levert
