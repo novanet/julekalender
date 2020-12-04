@@ -16,6 +16,8 @@ namespace ChristmasCalendar.Pages.Doors
 
         public DateTime TimeWhenDoorWasOpened { get; set; }
 
+        public bool IsDoorOpen { get; set; }
+
         [BindProperty]
         public AnswerViewModel AnswerInput { get; set; }
 
@@ -49,21 +51,23 @@ namespace ChristmasCalendar.Pages.Doors
                 return;
 
             FirstTimeOpeningDoor firstTimeOpeningDoor = await _databaseQueries.GetFirstTimeOpeningDoor(userId, Door.Id);
-            
-            if (firstTimeOpeningDoor == null)
-            {
-                await _databasePersister.RegisterFirstTimeOpeningDoor(userId, Door);
 
-                TimeWhenDoorWasOpened = DateTime.Now;
-            }
-            else
-            {
+            if (firstTimeOpeningDoor != null) {
                 TimeWhenDoorWasOpened = firstTimeOpeningDoor.When;
 
                 RegisteredAnswers = (await _databaseQueries.GetRegisteredAnswersForDoor(userId, Door.Id))
                     .Select(x => new RegisteredAnswerViewModel { When = x.When, Country = x.Country, Location = x.Location })
                     .ToList();
             }
+        }
+
+        public async Task<IActionResult> OnPostOpenDoor()
+        {
+            string userId = _userManager.GetUserId(HttpContext.User);
+            await _databasePersister.RegisterFirstTimeOpeningDoor(userId, Door);
+            IsDoorOpen = true;
+            TimeWhenDoorWasOpened = DateTime.Now;
+            return new OkObjectResult("Sesame is Open!");
         }
 
         public async Task<IActionResult> OnPostRegisterAnswerAsync(string returnUrl = null)

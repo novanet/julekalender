@@ -3,7 +3,7 @@
 @model IndexModel
 
 <row>
-    <div class="col-lg-10 col-lg-offset-1">
+    <div class="col-lg-10 col-lg-offset-1 animate__animated animate__fadeIn">
         <a href="https://www.novanet.no"><img src="~/images/NN_Logo_Liten_RGB.svg" alt="novanet-logo" width="100" /></a>
         <div class="nav-links pull-right">
             <a class="nav-links" asp-page="/Highscore/Highscore">Poeng</a><a class="nav-links" asp-page="/Doors/PreviousDoors">Tidligere luker</a>
@@ -12,7 +12,7 @@
 </row>
 <div style="clear:both"></div>
 <row>
-    <div class="col-container">
+    <div class="col-container animate__animated animate__fadeIn">
         <div class="col col-lg-5 col-lg-offset-1 col-md-6 box-big box-image box-splash visible-lg visible-md"></div>
         <div class="col col-lg-5 col-md-6 box-black box-big text-center box-splash">
             <span class="box-big"><strong>Velkommen til Novanets <span class="text-green">julekalender</span> 2020</strong></span>
@@ -21,7 +21,7 @@
 </row>
 <div style="clear:both"></div>
 <row>
-    <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
+    <div class="col-lg-10 col-lg-offset-1 text-center box-grey animate__animated animate__fadeIn">
         <h1><strong>Dagens luke</strong></h1>
         <br />
         @if (Model.TodaysDoor == null)
@@ -41,7 +41,7 @@
                 <span>Neste luke er @Model.NextDoor.ForDate.Day. des</span>
             }
         }
-        else if (!SignInManager.IsSignedIn(User))
+        else if (false)
         {
             <strong>Logg inn med:</strong><br /><br />
             <form asp-page="./Account/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
@@ -58,7 +58,7 @@
         }
         else
         {
-            <a class="btn btn-danger" asp-page="/Doors/Today">Åpne luke</a><br /><br />
+            <a class="btn btn-danger btn-lg  animate__animated animate__flipInX" asp-page="/Doors/Today">Gå til dagens luke</a><br /><br />
             @*<span>
                 <strong>NB!</strong> Når du åpner luken første gang så vil tidspunktet for dette bli registrert.<br />
                 Hvis du sender inn korrekt og endelig svar innen én time gir det ett ekstrapoeng.
@@ -68,7 +68,7 @@
 </row>
 <div style="clear:both"></div>
 <row>
-    <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
+    <div class="col-lg-10 col-lg-offset-1 text-center box-grey animate__animated animate__fadeIn">
         <h1><strong>Slik fungerer det</strong></h1>
         <br /><br />
         <row>
@@ -100,7 +100,7 @@
                     <h2 class="text-green"><strong>Vinner</strong></h2>
                     Når kalenderen er ferdig vinner den med flest poeng.
                     <br /><br />
-                    Hvis det er flere som har likt antall poeng totalt så blir det loddtrekning. 
+                    Hvis det er flere som har likt antall poeng totalt så blir det loddtrekning.
                     <br /><br />
                     Lykke til og god reise!<br/>
                                            <br />

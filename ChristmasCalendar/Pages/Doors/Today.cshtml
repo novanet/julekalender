@@ -32,27 +32,39 @@
                 <div class="col-lg-4" style="text-align:center;">
                     <h3 class="visible-lg">Dagens luke</h3>
                     <br class="visible-lg" />
-                    <ul class="nav nav-pills" style="padding:0;">
-                        <li role="presentation" style="padding:0;margin:0;">
+                    <div class="hidden animate__animated animate__fadeIn" id="doorDescription">@Model.Door.Description</div>
+                    <div style="padding-top:8px;">
+                        @if(!Model.IsDoorOpen)
+                        {
+                            <label class="flip-label" id="doorFlip">
+                                <input type="checkbox" style="display: none" />
+                                <div class="card" onclick="onOpenDoor()">
+                                    <div class="front btn-danger">
+                                        Åpne luke
+                                    </div>
+                                    <div class="back">
+                                        <a href="@Model.Door.ImagePath">
+                                            <span class="badge luke" style="background-image: url(@Model.Door.ImagePath)">@Model.Door.ForDate.Day</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </label>
+                        } else if (Model.IsDoorOpen) {
+                            <span id="doorImage" class="badge luke hidden" style="background-image: url(@Model.Door.ImagePath)">@Model.Door.ForDate.Day</span>
+                        }
+                    </div>
+                    <div class="hidden animate__animated animate__fadeIn" id="doorInstructions">
 
-                            <div>@Model.Door.Description</div>
-                            <div style="padding-top:8px;">
-                                <a href="@Model.Door.ImagePath">
-                                    <span class="badge luke" style="background-image: url(@Model.Door.ImagePath)">@Model.Door.ForDate.Day</span>
-                                </a>
-                            </div>
-
-                            <br />
-                            <small>Trykk på luken for å se bildet i full størrelse.</small>
-                            <br />
-                            <div>
-                                @if (@Model.Door.PointsForLocation.HasValue)
-                                {
-                                <small>Denne luken gir: @Model.Door.PointsForLocation poeng for sted, og @Model.Door.PointsForCountry poeng for fylke.</small>
-                                }
-                            </div>
-                        </li>
-                    </ul>
+                        <br />
+                        <small>Trykk på luken for å se bildet i full størrelse.</small>
+                        <br />
+                        <div>
+                            @if (@Model.Door.PointsForLocation.HasValue)
+                            {
+                            <small>Denne luken gir: @Model.Door.PointsForLocation poeng for sted, og @Model.Door.PointsForCountry poeng for fylke.</small>
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-4">
                     <br class="hidden-lg" />
@@ -112,6 +124,31 @@
             }
         </div>
     </row>
+
+    <script>
+        var christmasCalender_isDoorOpen = false;
+        function onOpenDoor() {
+            if (this.christmasCalender_isDoorOpen) return;
+            makeVisible("doorInstructions");
+            makeVisible("doorDescription");
+            this.christmasCalender_isDoorOpen = true;
+            $.ajax({
+                    url: "/doors/today?handler=OpenDoor",
+                    type: "post",
+                    headers: {
+                        RequestVerificationToken:
+                            $('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function (response) {
+                        this.christmasCalender_isDoorOpen = true;
+                    }
+                });
+        }
+
+        function makeVisible(elementId) {
+            document.getElementById(elementId).classList.remove("hidden");
+        }
+    </script>
 
     @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

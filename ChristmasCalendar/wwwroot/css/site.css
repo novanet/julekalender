@@ -1,92 +1,174 @@
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /* Carousel */
 .carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+  font-size: 20px;
+  line-height: 1.4;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+  width: 100%;
 }
 
 /* QR code generator */
 #qrCode {
-    margin: 15px;
+  margin: 15px;
 }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+  /* Hide captions */
+  .carousel-caption {
+    display: none;
+  }
 }
 
 .headline {
-    color: white !important;
-    font-size: xx-large;
-    font-weight: bold;
+  color: white !important;
+  font-size: xx-large;
+  font-weight: bold;
 }
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
 }
 
-.nav-tabs > li, .nav-pills > li {
-    margin: 16px;
-    float: none;
-    display: inline-block;
-    *display: inline; /* ie7 fix */
-    zoom: 1; /* hasLayout ie7 trigger */
+.nav-tabs > li,
+.nav-pills > li {
+  margin: 16px;
+  float: none;
+  display: inline-block;
+  *display: inline; /* ie7 fix */
+  zoom: 1; /* hasLayout ie7 trigger */
 }
 
 .nav-pills > li + li {
-    margin-left: 16px;
+  margin-left: 16px;
 }
 
-.nav-tabs, .nav-pills {
-    text-align: center;
+.nav-tabs,
+.nav-pills {
+  text-align: center;
 }
 
 .badge {
-    padding: 100px;
-    font-size: 48px;
-    width: 250px;
-    height: 250px;
+  padding: 100px;
+  font-size: 48px;
+  width: 100%;
+  height: 250px;
 }
 
 .luke {
-    background-color: #d42426;
-    background-size: cover;
-    background-repeat: no-repeat;
-    opacity: 0.8;
-    -khtml-opacity: .80;
-    -moz-opacity: .80;
-    -ms-filter: alpha(opacity=80);
-    filter: alpha(opacity=80);
-    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.8);
+  background-color: #d42426;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  -khtml-opacity: 0.8;
+  -moz-opacity: 0.8;
+  -ms-filter: alpha(opacity=80);
+  filter: alpha(opacity=80);
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.8);
 }
 
 .nav > li > a {
-    padding: 0px;
-    margin: 0px;
-    display: inline;
-    display: inline-block;
-    *display: inline;
-    float: left;
+  padding: 0px;
+  margin: 0px;
+  display: inline;
+  display: inline-block;
+  *display: inline;
+  float: left;
 }
 
 .nav > li > a:hover {
-    border-color: transparent
-}    
+  border-color: transparent;
+}
+
+.flip-label {
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  display: block;
+  width: 100%;
+  height: 250px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 600ms;
+  transition: all 600ms;
+  z-index: 20;
+  border-radius: 10px;
+}
+
+.card div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 200px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.card .back {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+
+.flip-label:hover .card {
+  -webkit-transform: rotateX(20deg);
+  transform: rotateX(20deg);
+  box-shadow: 0 20px 20px rgba(50, 50, 50, 0.2);
+}
+
+:checked + .card {
+  transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+}
+
+.flip-label:hover :checked + .card {
+  transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+  box-shadow: 0 20px 20px rgba(255, 255, 255, 0.2);
+}
+
+.front {
+  color: #ffffff;
+  background-color: #ff0039;
+  border-color: #ff0039;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: xx-large;
+}
+
+.animate__animated.animate__flipInX {
+  animation-delay: 0.2s;
+}
+
+.hidden {
+  display: none;
+}
