@@ -26,22 +26,23 @@ namespace ChristmasCalendar.Pages.Highscore
 
         public async Task OnGetAsync()
         {
-            Scores = await _databaseQueries.GetScores(DateTime.Now.Year);
+            var scores = await _databaseQueries.GetScores(DateTime.Now.Year);
 
-            //Scores = scoresFromDb
-            //    .Select(x => new HighscoreViewModel
-            //    {
-            //        NameOfUser = x.NameOfUser,
-            //        Points = x.Points,
-            //        Bonus = x.Bonus,
-            //        Rank = x.Rank,
-            //        //Rank = scoresFromDb.Count(y => y.TotalPoints * 1000000 + y.Points * 100000 - y.AverageSecondsSpentPerCorrectDoor > x.TotalPoints * 1000000 + x.Points * 100000 - x.AverageSecondsSpentPerCorrectDoor) + 1,
-            //        AverageSecondsSpentPerCorrectDoor = x.AverageSecondsSpentPerCorrectDoor
-            //    })
-            //    .OrderBy(x => x.Rank)
-            //    .ThenBy(x => x.NameOfUser)
-            //    .ToList();
+            int currentRank = 0;
+            int prevPoints = -1;
 
+            for (int i = 0; i < scores.Count; i++)
+            {
+                if (scores[i].PointsTotal != prevPoints)
+                {
+                    currentRank = i + 1;
+                    prevPoints = scores[i].PointsTotal;
+                }
+                scores[i].Rank = currentRank;
+            }
+
+            Scores = scores;
+            
             var lastUpdated = (await _databaseQueries.GetWhenScoreWasLastUpdated());
 
             LastUpdated = lastUpdated != DateTime.MinValue ? lastUpdated : (DateTime?)null;
