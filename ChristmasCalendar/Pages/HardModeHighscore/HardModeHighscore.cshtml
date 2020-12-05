@@ -1,0 +1,80 @@
+﻿@page
+@model HighscoreModel
+@inject SignInManager<ApplicationUser> SignInManager
+<row>
+    <div class="col-lg-10 col-lg-offset-1">
+        <a asp-page="/Index"><img src="~/images/NN_Logo_Liten_RGB.svg" alt="novanet-logo" width="100" /></a>
+        <div class="nav-links pull-right">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="nav-links" asp-page="/Doors/Today">Dagens</a>
+            }
+            <a class="nav-links current-page" asp-page="/Highscore/Highscore">Poeng</a><a class="nav-links"
+                asp-page="/Doors/PreviousDoors">Tidligere luker</a>
+        </div>
+        <br />
+        <br />
+    </div>
+</row>
+<row>
+    <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
+        <h1><strong>Poeng</strong></h1>
+    </div>
+    <div class="col-lg-8 col-lg-offset-2 col-sm-12 col-xs-12">
+        @if (Model.LastUpdated.HasValue)
+        {
+            <span class="pull-left small">Oppdatert: @Model.LastUpdated.Value.ToString("dd.MM.yyyy")</span>
+            <span class="pull-right small">Sortering: Totalt, Poeng, Tid</span>
+        }
+        <br /><br />
+
+        @if (!Model.Scores.Any())
+        {
+            <span>Ingen poeng så langt</span>
+        }
+        else
+        {
+            <table class="table table-hover" style="font-size: 14px">
+                <thead>
+                    <tr>
+                        <th style="text-align:left;">#</th>
+                        <th style="text-align:left;">Navn</th>
+                        <th style="text-align:center;">Tid</th>
+                        <th style="text-align:center;">Poeng sist luke</th>
+                        <th style="text-align:center;">Poeng totalt</th>
+                        <th style="text-align:center;">Bonus**</th>
+                        <th style="text-align:center;">Totalt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var score in Model.Scores)
+                    {
+                        <tr>
+                            <td style="text-align:left;">@score.Rank</td>
+                            <td style="text-align:left;">@score.NameOfUser</td>
+                            <td style="text-align:center;">@score.AverageSecondsSpentPerCorrectDoor</td>
+                            <td style="text-align:center;">@score.PointsLastDoor</td>
+                            <td style="text-align:center;">@score.PointsTotal</td>
+                            <td class="" style="text-align:center;">@score.Bonus</td>
+                            <td style="text-align:center;"><strong>@score.TotalPoints</strong></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <hr />
+            <p><small>* Tid er antall sekunder i snitt per luke man har klart både sted og land</small></p>
+            <p class="hidden-xs"><small>** Bonuspoeng gis hvis man klarer sted og land innen en time fra da man selv åpnet
+                    luken</small></p>
+            <br />
+            <div>
+                <small>
+                    Stillingen sorteres slik:<br />
+                    1. Totalt antall poeng<br />
+                    2. Poeng (ikke bonus)<br />
+                    3. Snittid per korrekte luke
+                </small>
+            </div>
+        }
+    </div>
+</row>
