@@ -26,40 +26,40 @@
         <br />
         @if (Model.TodaysDoor == null)
         {
-            @if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+        @if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
             {
-                <span>Kalenderen har helgefri! </span>
+        <span>Kalenderen har helgefri! </span>
             }
             else
             {
-                <span>Det er ingen luke for i dag</span>
+        <span>Det er ingen luke for i dag</span>
             }
 
-            @if (Model.NextDoor != null)
+        @if (Model.NextDoor != null)
             {
-                <br />
-                <span>Neste luke er @Model.NextDoor.ForDate.Day. des</span>
+        <br />
+        <span>Neste luke er @Model.NextDoor.ForDate.Day. des</span>
             }
         }
         else if (!SignInManager.IsSignedIn(User))
         {
-            <strong>Logg inn med:</strong><br /><br />
-            <form asp-page="./Account/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                <div>
-                    <p>
-                        @foreach (var provider in Model.ExternalLogins)
+        <strong>Logg inn med:</strong><br /><br />
+        <form asp-page="./Account/ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+            <div>
+                <p>
+                    @foreach (var provider in Model.ExternalLogins)
                         {
-                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                         }
-                    </p>
-                </div>
-            </form>
-            <span>NB! Bruk samme innloggingsmetode hver gang.</span>
+                </p>
+            </div>
+        </form>
+        <span>NB! Bruk samme innloggingsmetode hver gang.</span>
         }
         else
         {
-            <a class="btn btn-danger" asp-page="/Doors/Today">Åpne luke</a><br /><br />
-            @*<span>
+        <a class="btn btn-danger" asp-page="/Doors/Today">Åpne luke</a><br /><br />
+        @*<span>
                 <strong>NB!</strong> Når du åpner luken første gang så vil tidspunktet for dette bli registrert.<br />
                 Hvis du sender inn korrekt og endelig svar innen én time gir det ett ekstrapoeng.
             </span>*@
@@ -102,8 +102,8 @@
                     <br /><br />
                     Hvis det er flere som har likt antall poeng totalt så blir det loddtrekning.
                     <br /><br />
-                    Lykke til og god reise!<br/>
-                                           <br />
+                    Lykke til og god reise!<br />
+                    <br />
                     <br />
                     <br />
                     <br />
@@ -129,7 +129,7 @@
     <div class="col-lg-10 col-lg-offset-1 text-center box-grey">
         <h1><strong>Premie</strong></h1><br /><br />
         <div class="col-lg-6 col-lg-offset-3">
-            <img src="~/images/gavekort.jpg" alt="premie-gavekort" width="100%"/>
+            <img src="~/images/gavekort.jpg" alt="premie-gavekort" width="100%" />
             <br />
             <br />
             <p>Vinneren av konkurransen får et gavekort på Nomaden til 500 kr.</p>
@@ -142,9 +142,10 @@
         <h1><strong>Husk!</strong></h1><br /><br />Det er lov å svare flere ganger, det siste innsendte svaret teller.
     </div>
 </row>
-<div style="clear:both"></div>
-<row>
-    <div class="col-lg-10 col-lg-offset-1 text-center" style="margin-top: 7em; margin-bottom: 3em">
-        <a asp-page="/Highscore/HardModeHighscore"><img style="width: 5em;" src="https://media.giphy.com/media/dvkFZr4VBBS6I/giphy.gif"/></a>
-    </div>
-</row>
+@*
+    <div style="clear:both"></div>
+    <row>
+        <div class="col-lg-10 col-lg-offset-1 text-center" style="margin-top: 7em; margin-bottom: 3em">
+            <a asp-page="/Highscore/HardModeHighscore"><img style="width: 5em;" src="https://media.giphy.com/media/dvkFZr4VBBS6I/giphy.gif"/></a>
+        </div>
+    </row>*@
