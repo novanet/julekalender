@@ -54,7 +54,7 @@ namespace ChristmasCalendar.Data
         }
         public Task<List<HighscoreViewModel>> GetScoresSortedByTime(int year)
         {
-            var doorNumber = _context.DailyScore.Where(x => x.Year == year).Max(x => x.DoorNumber);
+            var doorNumberLastDoor = _context.DailyScore.Where(x => x.Year == year).Max(x => x.DoorNumber);
 
             return _context.DailyScore
                 .Where(x => x.Year == year)
@@ -63,14 +63,13 @@ namespace ChristmasCalendar.Data
                 {
                     NameOfUser = x.Key.NameOfUser,
                     PointsTotal = x.Sum(y => y.Points),
-                    PointsLastDoor = x.Where(y => y.DoorNumber == doorNumber).Sum(y => y.Points),
+                    PointsLastDoor = x.Where(y => y.DoorNumber == doorNumberLastDoor).Sum(y => y.Points),
                     Rank = x.OrderByDescending(y => y.DoorNumber).First().Rank,
                     Bonus = x.Sum(y => y.Bonus),
-                    AverageSecondsSpentPerCorrectDoor = (int)x.Where(y => y.Points == 2).DefaultIfEmpty().Average(y => y.TimeToAnswer)
+                    AverageSecondsSpentPerCorrectDoor = (int)x.DefaultIfEmpty().Average(y => y.TimeToAnswer)
                 })
                 .OrderByDescending(x => x.PointsTotal)
-                .ThenBy(x => x.Points)
-                .ThenBy(x => x.TotalTimeToAnswer)
+                .ThenBy(x => x.AverageSecondsSpentPerCorrectDoor)
                 .ToListAsync();
         }
 
