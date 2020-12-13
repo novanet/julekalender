@@ -22,5 +22,6 @@ namespace ChristmasCalendar.Data
         Task<FirstTimeOpeningDoor> GetFirstTimeOpeningDoor(string userId, int doorId);
 
         Task<DateTime> GetWhenScoreWasLastUpdated();
+        Task<List<HighscoreViewModel>> GetScoresSortedByTime(int year);
     }
 }

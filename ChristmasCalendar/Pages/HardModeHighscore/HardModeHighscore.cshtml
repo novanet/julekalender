@@ -1,0 +1,162 @@
+﻿@page
+@model HighscoreModel
+@inject SignInManager<ApplicationUser> SignInManager
+<row>
+    <div class="col-lg-10 col-lg-offset-1">
+        <a asp-page="/Index"><img src="~/images/NN_Logo_Liten_RGB.svg" alt="novanet-logo" width="100" /></a>
+        <div class="nav-links pull-right">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="nav-links" asp-page="/Doors/Today">Dagens</a>
+            }
+            <a class="nav-links current-page" asp-page="/Highscore/Highscore">Poeng</a><a class="nav-links"
+                asp-page="/Doors/PreviousDoors">Tidligere luker</a>
+        </div>
+        <br />
+        <br />
+    </div>
+</row>
+<row>
+    <div class="col-lg-10 col-lg-offset-1 glowing-text">
+        <span>HARD MODE</span>
+    </div>
+    <div class="col-lg-10 col-lg-offset-1">
+       <blockquote class="blockquote">
+            <p class="mb-0">Av spillere for spillere</p>
+        </blockquote>
+    </div>
+    <div class="col-lg-8 col-lg-offset-2 col-sm-12 col-xs-12">
+        @if (Model.LastUpdated.HasValue)
+        {
+            <span class="pull-left small">Oppdatert: @Model.LastUpdated.Value.ToString("dd.MM.yyyy")</span>
+            <span class="pull-right small">Sortering: Totalt, Poeng, Tid</span>
+        }
+        <br /><br />
+
+        @if (!Model.Scores.Any())
+        {
+            <span>Ingen poeng så langt</span>
+        }
+        else
+        {
+            <table class="table table-hover" style="font-size: 14px">
+                <thead>
+                    <tr>
+                        <th style="text-align:left;">#</th>
+                        <th style="text-align:left;">Navn</th>
+                        <th style="text-align:center;">Tid</th>
+                        <th style="text-align:center;">Poeng sist luke</th>
+                        <th style="text-align:center;">Poeng totalt</th>
+                        <th style="text-align:center;">Bonus**</th>
+                        <th style="text-align:center;">Totalt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var score in Model.Scores)
+                    {
+                        <tr>
+                            <td style="text-align:left;">@score.Rank</td>
+                            <td style="text-align:left;">@score.NameOfUser</td>
+                            <td style="text-align:center;">@score.AverageSecondsSpentPerCorrectDoor</td>
+                            <td style="text-align:center;">@score.PointsLastDoor</td>
+                            <td style="text-align:center;">@score.PointsTotal</td>
+                            <td class="" style="text-align:center;">@score.Bonus</td>
+                            <td style="text-align:center;"><strong>@score.TotalPoints</strong></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <hr />
+            <p><small>* Tid er antall sekunder i snitt per luke man har klart både sted og land</small></p>
+            <p class="hidden-xs"><small>** Bonuspoeng gis hvis man klarer sted og land innen en time fra da man selv åpnet
+                    luken</small></p>
+            <br />
+            <div>
+                <small>
+                    Stillingen sorteres slik:<br />
+                    1. Totalt antall poeng<br />
+                    2. Poeng (ikke bonus)<br />
+                    3. Snittid per korrekte luke
+                </small>
+            </div>
+        }
+    </div>
+</row>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.glowing-text {
+  font-size: 7vw;
+  font-family: 'Permanent Marker', cursive;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  height: 30%;
+  text-align: center;
+  background: #111;
+  color: #DC3545;
+  margin-bottom: 2rem;
+}
+
+.glowing-text span {
+  -webkit-animation: glow 2s ease-in-out both infinite;
+          animation: glow 2s ease-in-out both infinite;
+}
+.glowing-text span:nth-child(1) {
+  -webkit-animation-delay: -0.2857142857s;
+          animation-delay: -0.2857142857s;
+}
+.glowing-text span:nth-child(2) {
+  -webkit-animation-delay: -0.5714285714s;
+          animation-delay: -0.5714285714s;
+}
+.glowing-text span:nth-child(3) {
+  -webkit-animation-delay: -0.8571428571s;
+          animation-delay: -0.8571428571s;
+}
+.glowing-textspan:nth-child(4) {
+  -webkit-animation-delay: -1.1428571429s;
+          animation-delay: -1.1428571429s;
+}
+.glowing-text span:nth-child(5) {
+  -webkit-animation-delay: -1.4285714286s;
+          animation-delay: -1.4285714286s;
+}
+.glowing-text span:nth-child(6) {
+  -webkit-animation-delay: -1.7142857143s;
+          animation-delay: -1.7142857143s;
+}
+.glowing-text span:nth-child(7) {
+  -webkit-animation-delay: -2s;
+          animation-delay: -2s;
+}
+
+@-webkit-keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 8.3333333333px #DC3545, 0 -25px 50px #841f29, -25px 25px 50px #6e1a22, 25px 25px 50px #841f29;
+  }
+  33% {
+    text-shadow: 0 0 8.3333333333px #DC3545, 0 -25px 50px #b02a37, -25px 25px 50px #841f29, 25px 25px 50px #b02a37;
+  }
+  66% {
+    text-shadow: 0 0 8.3333333333px #DC3545, 0 -25px 50px #6e1a22, -25px 25px 50px #b02a37, 25px 25px 50px #6e1a22;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 8.3333333333px #DC3545, 0 -25px 50px #841f29, -25px 25px 50px #6e1a22, 25px 25px 50px #841f29;
+  }
+  33% {
+    text-shadow: 0 0 8.3333333333px #DC3545, 0 -25px 50px #b02a37, -25px 25px 50px #841f29, 25px 25px 50px #b02a37;
+  }
+  66% {
+    text-shadow: 0 0 8.3333333333px #DC3545, 0 -25px 50px #6e1a22, -25px 25px 50px #b02a37, 25px 25px 50px #6e1a22;
+  }
+}
+
+</style>
