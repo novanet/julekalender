@@ -66,7 +66,7 @@ namespace ChristmasCalendar.Data
                     PointsLastDoor = x.Where(y => y.DoorNumber == doorNumberLastDoor).Sum(y => y.Points),
                     Rank = x.OrderByDescending(y => y.DoorNumber).First().Rank,
                     Bonus = x.Sum(y => y.Bonus),
-                    TotalTimeToAnswer = x.Sum(y => y.TimeToAnswer),
+                    TotalTimeToAnswer = (int)x.DefaultIfEmpty().Sum(y => y.TimeToAnswer),
                     AverageSecondsSpentPerCorrectDoor = (int)x.DefaultIfEmpty().Average(y => y.TimeToAnswer)
                 })
                 .Where(x => x.PointsTotal > doorNumberLastDoor)
