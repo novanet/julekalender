@@ -57,7 +57,7 @@ namespace ChristmasCalendar.Data
             var doorNumberLastDoor = _context.DailyScore.Where(x => x.Year == year).Max(x => x.DoorNumber);
 
             return _context.DailyScore
-                .Where(x => x.Year == year)
+                .Where(x => x.Year == year && x.TimeToAnswer > 0)
                 .GroupBy(x => new { x.UserId, x.NameOfUser })
                 .Select(x => new HighscoreViewModel
                 {
@@ -69,6 +69,7 @@ namespace ChristmasCalendar.Data
                     TotalTimeToAnswer = x.Sum(y => y.TimeToAnswer),
                     AverageSecondsSpentPerCorrectDoor = (int)x.DefaultIfEmpty().Average(y => y.TimeToAnswer)
                 })
+                .Where(x => x.PointsTotal > doorNumberLastDoor)
                 .OrderByDescending(x => x.PointsTotal)
                 .ThenBy(x => x.TotalTimeToAnswer)
                 .ThenBy(x => x.AverageSecondsSpentPerCorrectDoor)
