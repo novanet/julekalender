@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+.glowing-text {
+  font-size: 7vw;
+  font-family: "Permanent Marker", cursive;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 30%;
+  text-align: center;
+  background: #111;
+  color: #dc3545;
+  margin-bottom: 2rem;
+}
+
+.glowing-text span {
+  -webkit-animation: glow 2s ease-in-out both infinite;
+  animation: glow 2s ease-in-out both infinite;
+}
+.glowing-text span:nth-child(1) {
+  -webkit-animation-delay: -0.2857142857s;
+  animation-delay: -0.2857142857s;
+}
+.glowing-text span:nth-child(2) {
+  -webkit-animation-delay: -0.5714285714s;
+  animation-delay: -0.5714285714s;
+}
+.glowing-text span:nth-child(3) {
+  -webkit-animation-delay: -0.8571428571s;
+  animation-delay: -0.8571428571s;
+}
+.glowing-textspan:nth-child(4) {
+  -webkit-animation-delay: -1.1428571429s;
+  animation-delay: -1.1428571429s;
+}
+.glowing-text span:nth-child(5) {
+  -webkit-animation-delay: -1.4285714286s;
+  animation-delay: -1.4285714286s;
+}
+.glowing-text span:nth-child(6) {
+  -webkit-animation-delay: -1.7142857143s;
+  animation-delay: -1.7142857143s;
+}
+.glowing-text span:nth-child(7) {
+  -webkit-animation-delay: -2s;
+  animation-delay: -2s;
+}
+
+@-webkit-keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 8.3333333333px #dc3545, 0 -25px 50px #841f29,
+      -25px 25px 50px #6e1a22, 25px 25px 50px #841f29;
+  }
+  33% {
+    text-shadow: 0 0 8.3333333333px #dc3545, 0 -25px 50px #b02a37,
+      -25px 25px 50px #841f29, 25px 25px 50px #b02a37;
+  }
+  66% {
+    text-shadow: 0 0 8.3333333333px #dc3545, 0 -25px 50px #6e1a22,
+      -25px 25px 50px #b02a37, 25px 25px 50px #6e1a22;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 8.3333333333px #dc3545, 0 -25px 50px #841f29,
+      -25px 25px 50px #6e1a22, 25px 25px 50px #841f29;
+  }
+  33% {
+    text-shadow: 0 0 8.3333333333px #dc3545, 0 -25px 50px #b02a37,
+      -25px 25px 50px #841f29, 25px 25px 50px #b02a37;
+  }
+  66% {
+    text-shadow: 0 0 8.3333333333px #dc3545, 0 -25px 50px #6e1a22,
+      -25px 25px 50px #b02a37, 25px 25px 50px #6e1a22;
+  }
+}

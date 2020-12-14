@@ -66,10 +66,13 @@ namespace ChristmasCalendar.Data
                     PointsLastDoor = x.Where(y => y.DoorNumber == doorNumberLastDoor).Sum(y => y.Points),
                     Rank = x.OrderByDescending(y => y.DoorNumber).First().Rank,
                     Bonus = x.Sum(y => y.Bonus),
+                    TotalTimeToAnswer = x.Sum(y => y.TimeToAnswer),
                     AverageSecondsSpentPerCorrectDoor = (int)x.DefaultIfEmpty().Average(y => y.TimeToAnswer)
                 })
                 .OrderByDescending(x => x.PointsTotal)
+                .ThenBy(x => x.TotalTimeToAnswer)
                 .ThenBy(x => x.AverageSecondsSpentPerCorrectDoor)
+                .ThenBy(x => x.NameOfUser)
                 .ToListAsync();
         }
 
